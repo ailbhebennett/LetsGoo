@@ -1,26 +1,32 @@
 package com.example.letsgoo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.letsgoo.RecyclerViewAdapter
-import com.example.letsgoo.RecyclerViewAdapter.ViewHolder
 
 class MainActivity : AppCompatActivity() {
 
-    private var layoutManager: RecyclerView.LayoutManager? =null
-    private var adapter: RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>? = null
+     var ItemViewList : ArrayList<ItemViewModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        layoutManager = LinearLayoutManager(this)
+        //add items to list
 
-        recyclerView.LayoutManager = layoutManager
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
-        adapter = RecyclerViewAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val data = ArrayList<ItemViewModel>()
+
+        for (i in 1..20){
+            data.add(ItemViewModel(R.drawable.hotelimage, "Item " + i))
+        }
+
+        val adapter = RecyclerViewAdapter(data)
+
         recyclerView.adapter = adapter
 
 
